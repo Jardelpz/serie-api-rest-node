@@ -63,7 +63,7 @@ router.put('/:projectId', async (req, res) => {
     await Task.remove({ project: project._id });
 
     await Promise.all(tasks.map(async task => {
-      const projectTask = new Task({ ...task, project: project._id });
+      const projectTask = new Task({ ...task, project: project._id, assignedTo: req.userId });
 
       await projectTask.save();
 
